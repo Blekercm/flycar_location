@@ -86,7 +86,7 @@ enum PermissionStatus {
   DENIED_FOREVER
 }
 
-class Location {
+class FlycarLocation {
   /// Initializes the plugin and starts listening for potential platform events.
   factory Location() {
     if (_instance == null) {
@@ -94,7 +94,7 @@ class Location {
           const MethodChannel('flycar/location');
       final EventChannel eventChannel =
           const EventChannel('flycar/locationstream');
-      _instance = Location.private(methodChannel, eventChannel);
+      _instance = FlycarLocation.private(methodChannel, eventChannel);
     }
     return _instance;
   }
@@ -102,9 +102,9 @@ class Location {
   /// This constructor is only used for testing and shouldn't be accessed by
   /// users of the plugin. It may break or change at any time.
   @visibleForTesting
-  Location.private(this._methodChannel, this._eventChannel);
+  FlycarLocation.private(this._methodChannel, this._eventChannel);
 
-  static Location _instance;
+  static FlycarLocation _instance;
 
   final MethodChannel _methodChannel;
   final EventChannel _eventChannel;
