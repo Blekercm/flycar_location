@@ -88,7 +88,7 @@ enum PermissionStatus {
 
 class FlycarLocation {
   /// Initializes the plugin and starts listening for potential platform events.
-  factory Location() {
+  factory FlycarLocation() {
     if (_instance == null) {
       final MethodChannel methodChannel =
           const MethodChannel('flycar/location');
