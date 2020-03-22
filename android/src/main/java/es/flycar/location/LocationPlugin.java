@@ -1,4 +1,4 @@
-package es.flycar.location.;
+package es.flycar.location;
 
 import android.app.Activity;
 
