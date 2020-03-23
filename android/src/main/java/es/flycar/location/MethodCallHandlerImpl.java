@@ -17,7 +17,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler {
     @Nullable
     private MethodChannel channel;
 
-    private static final String METHOD_CHANNEL_NAME = "flycar/location";
+    private static final String METHOD_CHANNEL_NAME = "lyokone/location";
 
     MethodCallHandlerImpl(FlutterLocation location) {
         this.location = location;
@@ -85,9 +85,9 @@ final class MethodCallHandlerImpl implements MethodCallHandler {
     private void onChangeSettings(MethodCall call, Result result) {
         try {
             final Integer locationAccuracy = location.mapFlutterAccuracy.get(call.argument("accuracy"));
-            final Long updateIntervalMilliseconds = (long) (int) call.argument("interval");
+            final Long updateIntervalMilliseconds = new Long((int) call.argument("interval"));
             final Long fastestUpdateIntervalMilliseconds = updateIntervalMilliseconds / 2;
-            final Float distanceFilter = Float.valueOf((double) call.argument("distanceFilter"));
+            final Float distanceFilter = new Float((double) call.argument("distanceFilter"));
 
             location.changeSettings(locationAccuracy, updateIntervalMilliseconds, fastestUpdateIntervalMilliseconds,
                     distanceFilter);

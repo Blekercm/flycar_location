@@ -1,10 +1,10 @@
 package es.flycar.location;
 
 import android.app.Activity;
-
+import android.os.Bundle;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -72,16 +72,15 @@ public class LocationPlugin implements FlutterPlugin, ActivityAware {
     }
 
     @Override
-    private void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
-        assert location != null;
+    public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         location.setActivity(binding.getActivity());
 
         activityBinding = binding;
-        setup(pluginBinding.getBinaryMessenger(), activityBinding.getActivity());
+        setup(pluginBinding.getBinaryMessenger(), activityBinding.getActivity(), null);
     }
 
     @Override
-    private void onDetachedFromActivity() {
+    public void onDetachedFromActivity() {
         tearDown();
     }
 
@@ -95,11 +94,18 @@ public class LocationPlugin implements FlutterPlugin, ActivityAware {
         onAttachedToActivity(binding);
     }
 
-    private void setup(final BinaryMessenger messenger, final Activity activity) {
+    private void setup(final BinaryMessenger messenger, final Activity activity,
+            final PluginRegistry.Registrar registrar) {
         this.activity = activity;
-        // V2 embedding setup for activity listeners.
-        activityBinding.addActivityResultListener(location);
-        activityBinding.addRequestPermissionsResultListener(location);
+        if (registrar != null) {
+            // V1 embedding setup for activity listeners.
+            registrar.addActivityResultListener(location);
+            registrar.addRequestPermissionsResultListener(location);
+        } else {
+            // V2 embedding setup for activity listeners.
+            activityBinding.addActivityResultListener(location);
+            activityBinding.addRequestPermissionsResultListener(location);
+        }
     }
 
     private void tearDown() {

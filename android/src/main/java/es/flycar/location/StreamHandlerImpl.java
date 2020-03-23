@@ -12,7 +12,7 @@ class StreamHandlerImpl implements StreamHandler {
     private final FlutterLocation location;
     private EventChannel channel;
 
-    private static final String STREAM_CHANNEL_NAME = "flycar/locationstream";
+    private static final String STREAM_CHANNEL_NAME = "lyokone/locationstream";
 
     StreamHandlerImpl(FlutterLocation location) {
         this.location = location;
