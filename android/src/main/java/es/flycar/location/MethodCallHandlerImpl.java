@@ -17,7 +17,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler {
     @Nullable
     private MethodChannel channel;
 
-    private static final String METHOD_CHANNEL_NAME = "lyokone/location";
+    private static final String METHOD_CHANNEL_NAME = "flycar/location";
 
     MethodCallHandlerImpl(FlutterLocation location) {
         this.location = location;
